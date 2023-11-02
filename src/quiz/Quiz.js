@@ -33,31 +33,28 @@ const Quiz = () => {
 
 const Box = ({ current, handler, shuffledQuestions }) => {
   const { correct, setCorrect, setExit } = useContext(QuizContext);
-  const [ans, setAns] = useState("");
-  const [timer, setTimer] = useState(60); // Initial timer set to 60 seconds
+  const [ans, setAns] = useState('');
+  const [timer, setTimer] = useState(60);
 
-  // Define a function to handle the timer
-  const handleTimer = () => {
-    if (timer === 0) {
-      // Move to the next question if the timer runs out
-      if (current + 1 < shuffledQuestions.length) {
-        handler(current + 1);
-        setTimer(60); // Reset the timer for the next question
-      } else {
-        setExit(true);
-      }
-    } else {
-      setTimer(timer - 1); // Decrease the timer count by 1 second
-    }
-  };
 
   useEffect(() => {
-    // Start the timer when the component mounts
-    const timerId = setTimeout(handleTimer, 1000);
+    const timerId = setInterval(() => {
+      if (timer > 0) {
+        setTimer(timer - 1);
+      } else {
+        // Time's up, proceed to the next question
+        setTimer(60); // Reset the timer to your initial time
+        if (current + 1 === shuffledQuestions.length) {
+          setExit(true);
+        } else {
+          handler(current + 1);
+        }
+      }
+    }, 1000);
 
-    // Clear the timer when the component unmounts or when the next question is loaded
-    return () => clearTimeout(timerId);
-  }, [timer, current, handler, shuffledQuestions]);
+    return () => clearInterval(timerId);
+  }, [timer, handler, current, shuffledQuestions, setExit]);
+  
 
   if (!shuffledQuestions || !shuffledQuestions[current]) {
     // Add a guard clause to handle the case when shuffledQuestions is undefined or current is out of bounds.
@@ -77,7 +74,10 @@ const Box = ({ current, handler, shuffledQuestions }) => {
     if (shuffledQuestions[current].correctOption === ans) {
       setCorrect(correct + 1);
     }
-    setAns("");
+    setAns('');
+
+    // Reset the timer when moving to the next question
+    setTimer(60);
 
     if (current + 1 === shuffledQuestions.length) {
       setExit(true);
@@ -85,6 +85,7 @@ const Box = ({ current, handler, shuffledQuestions }) => {
       handler(current + 1);
     }
   };
+  
 
   return (
     <div className="p-8 sm:p-6 md:p-8 lg:p-10">
