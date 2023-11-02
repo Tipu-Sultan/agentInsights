@@ -1,0 +1,12 @@
+body{
+  background-image: url('./assets/Background.png'); /* Replace with the actual path to your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: black
+}
+
+/* src/index.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
