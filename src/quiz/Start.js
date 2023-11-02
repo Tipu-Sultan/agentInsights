@@ -13,7 +13,7 @@ const Start = () => {
           className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded transition-transform transform hover:scale-105"
           onClick={() => setStart(true)}
         >
-          Start
+          Start Quiz
         </button>
       </div>
     </div>
