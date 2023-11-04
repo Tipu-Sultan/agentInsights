@@ -22,6 +22,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 
 ## Notes
-I have set all answers to option 'a'
+I have set all answers to option 'a'.
 
-i depoy this App on Vercel 
+I deployed this app on Vercel.
