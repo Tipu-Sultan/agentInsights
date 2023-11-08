@@ -1,7 +1,7 @@
 const quizArray = [
   {
     question: "What does JSX stand for?",
-    options: ["JavaScript XML", "Java Syntax Extension", "JSON XML", "Java Syntax Extension"],
+    options: ["JavaScript XML", "Java Standard Extension", "JSON XML", "Java Syntax Extension"],
     correctOption: "JavaScript XML"
   },
   {
